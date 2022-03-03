@@ -29,7 +29,7 @@ How I configure my MacBookPro for web development at TB. This excludes the confi
 - Disable add period with double-space
 - Disable Use smart quotes and dashes
 - Change for Double Quotes to "
-- Change for Single Quotes to ‘
+- Change for Single Quotes to '
 - Shortcuts: Spotlight: Disable all (using Alfred, spotlight sucks)
 
 ## Finder
