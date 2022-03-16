@@ -55,7 +55,7 @@ How I configure my MacBookPro for web development at TB. This excludes the confi
 
 Install Homebrew
 
-`/bin/bash -c "$(curl -fsSL [https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh](https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh))"`
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 
 Update everything
 
