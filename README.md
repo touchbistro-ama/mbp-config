@@ -4,6 +4,9 @@ How I configure my MacBookPro for web development at TB. This excludes the confi
 
 # System Preferences
 
+## General
+- Appearance: Set to dark mode
+
 ## Dock & Menu Bar
 
 - Enable: Automatically hide and show the dock
@@ -31,6 +34,7 @@ How I configure my MacBookPro for web development at TB. This excludes the confi
 - Change for Double Quotes to "
 - Change for Single Quotes to '
 - Shortcuts: Spotlight: Disable all (using Alfred, spotlight sucks)
+- Shortcuts: Accessibility: Disable all
 
 ## Finder
 
@@ -62,6 +66,7 @@ Install GUI apps
 ```bash
 brew install --cask \ 
     1password \ 
+    topnotch \
     google-chrome \ 
     firefox \ 
     iterm2 \ 
