@@ -215,19 +215,84 @@ plugins=(
     docker
     docker-compose
     git
+    zsh-autosuggestions
+    zsh-syntax-highlighting
 )
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+source $(brew --prefix nvm)/nvm.sh
 
 # load the plugins
 source $ZSH/oh-my-zsh.sh
 
+# place this after nvm initialization!
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+
 # easily reload zsh config
 alias zshreload="source ~/.zshrc"
 
-# use nvm
-source /usr/local/opt/nvm/nvm.sh
+# aws-vault for touch bistro
+alias sso="aws-vault exec touchbistro --"
+
+# use thefuck but 'typo' instead of 'fuck'
+eval $(thefuck --alias wtf)
+
+# use 'fuck' with auto confirmation
+alias yolo="wtf --yeah"
+
+# wiring
+alias wire="sso tb up -p vcs-bkda-core-deps"
+
+
+# deletes all branches where remote is gone
+clean-branches() {
+  git fetch -p
+
+  for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); 
+    do git branch -D $branch; 
+  done
+}
+
+# Go back to latest version of master branch after finishing work
+alias goup="git checkout master && git pull && clean-branches"
+
+# Merge latest from master to current branch
+alias gmm="git fetch origin && git merge origin/master"
+
+# Force quit any apps listening on port
+killport() { 
+  lsof -i TCP:$1 | grep LISTEN | awk '{print $2}' | xargs kill -9 
+}
+
+export PATH="/usr/local/share/dotnet:$PATH"
 
 # use startship theme - needs to be the last command
 eval "$(starship init zsh)"
+
+# bun completions
+[ -s "/Users/ama/.bun/_bun" ] && source "/Users/ama/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 ```
 
